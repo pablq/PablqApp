@@ -1,24 +1,19 @@
-package com.pablq.pablq_app.ui.main.view.sportslist
+package com.pablq.pablq_app.ui.main.view.sports
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.pablq.pablq_app.R
 import com.pablq.pablq_app.ui.main.MainViewModel
+import com.pablq.pablq_app.ui.main.Sport
 
 class SportsListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() =
-            SportsListFragment()
-    }
-
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -27,21 +22,17 @@ class SportsListFragment : Fragment() {
 
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.sportsListRecyclerView)
 
-        val data = arrayOf("hello", "hello again", "third element")
-
-        val sportsListAdapter = SportsListAdapter(sportsList = data)
+        val sportsListAdapter = SportsListAdapter(viewModel.allSports, {
+            handleSportSelected(it)
+        })
 
         recyclerView.adapter = sportsListAdapter
-
-        recyclerView.layoutManager = LinearLayoutManager(activity)
 
         return rootView
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun handleSportSelected(sport: Sport) {
+        viewModel.selectedSport.value = sport
+        // TODO: Shows games list view
     }
-
 }
