@@ -1,4 +1,4 @@
-package com.pablq.pablq_app.ui.main.view.games
+package com.pablq.pablq_app.ui.main.games
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,9 +25,10 @@ class GamesListFragment: Fragment() {
 
         val rootView = inflater.inflate(R.layout.games_list_fragment, container, false)
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.gamesListRecyclerView)
-        gamesListAdapter = GamesListAdapter(games) {
-            // TODO: Launch browser
-        }
+        gamesListAdapter =
+            GamesListAdapter(games) {
+                // TODO: Launch browser
+            }
         recyclerView.adapter = gamesListAdapter
 
         viewModel.games.observe(viewLifecycleOwner) {

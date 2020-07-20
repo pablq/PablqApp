@@ -1,4 +1,4 @@
-package com.pablq.pablq_app.ui.main.view.sports
+package com.pablq.pablq_app.ui.main.sports
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

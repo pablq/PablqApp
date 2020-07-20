@@ -1,4 +1,4 @@
-package com.pablq.pablq_app.ui.main.view.sports
+package com.pablq.pablq_app.ui.main.sports
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pablq.pablq_app.R
 import com.pablq.pablq_app.ui.main.MainViewModel
 import com.pablq.pablq_app.ui.main.Sport
-import com.pablq.pablq_app.ui.main.view.games.GamesListFragment
+import com.pablq.pablq_app.ui.main.games.GamesListFragment
 
 class SportsListFragment : Fragment() {
 
@@ -21,9 +21,10 @@ class SportsListFragment : Fragment() {
 
         val rootView = inflater.inflate(R.layout.sports_list_fragment, container, false)
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.sportsListRecyclerView)
-        val sportsListAdapter = SportsListAdapter(viewModel.allSports) {
-            handleSportSelected(it)
-        }
+        val sportsListAdapter =
+            SportsListAdapter(viewModel.allSports) {
+                handleSportSelected(it)
+            }
         recyclerView.adapter = sportsListAdapter
 
         return rootView
@@ -36,7 +37,9 @@ class SportsListFragment : Fragment() {
             parentFragmentManager
                 .beginTransaction()
                 .setCustomAnimations(R.anim.fragment_open_enter, R.anim.fragment_fade_exit)
-                .replace(R.id.container, GamesListFragment())
+                .replace(R.id.container,
+                    GamesListFragment()
+                )
                 .addToBackStack(null)
                 .commit()
         }

@@ -1,4 +1,4 @@
-package com.pablq.pablq_app.ui.main.view.games
+package com.pablq.pablq_app.ui.main.games
 
 import android.graphics.Color
 import android.view.LayoutInflater
