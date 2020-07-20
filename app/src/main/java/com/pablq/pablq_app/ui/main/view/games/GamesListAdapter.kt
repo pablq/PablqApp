@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.pablq.pablq_app.R
 import com.pablq.pablq_app.R.layout.game_card
@@ -17,7 +18,7 @@ class GamesListAdapter(
 
     // TODO: Custom Game Card class?
     inner class GameCardViewHolder(
-        private val containerView: View,
+        private val containerView: CardView,
         private val headlineTextView: TextView,
         private val descriptionTextView: TextView,
         private val linkTextView: TextView,
@@ -37,12 +38,12 @@ class GamesListAdapter(
                 onClickHandler(game)
             }
             val backgroundColor = if (game.isFavorite) Color.RED else Color.GRAY
-            containerView.setBackgroundColor(backgroundColor)
+            containerView.setCardBackgroundColor(backgroundColor)
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameCardViewHolder {
-        val containerView = LayoutInflater.from(parent.context).inflate(game_card, parent, false)
+        val containerView = LayoutInflater.from(parent.context).inflate(game_card, parent, false) as CardView
         val headlineTextView = containerView.findViewById<TextView>(R.id.gameHeadline)
         val descriptionTextView = containerView.findViewById<TextView>(R.id.gameDescription)
         val linkTextView = containerView.findViewById<TextView>(R.id.gameLink)

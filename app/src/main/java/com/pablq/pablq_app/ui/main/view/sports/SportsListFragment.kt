@@ -20,13 +20,10 @@ class SportsListFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
 
         val rootView = inflater.inflate(R.layout.sports_list_fragment, container, false)
-
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.sportsListRecyclerView)
-
         val sportsListAdapter = SportsListAdapter(viewModel.allSports) {
             handleSportSelected(it)
         }
-
         recyclerView.adapter = sportsListAdapter
 
         return rootView
@@ -38,6 +35,7 @@ class SportsListFragment : Fragment() {
         if (isAdded) {
             parentFragmentManager
                 .beginTransaction()
+                .setCustomAnimations(R.anim.fragment_open_enter, R.anim.fragment_fade_exit)
                 .replace(R.id.container, GamesListFragment())
                 .addToBackStack(null)
                 .commit()
