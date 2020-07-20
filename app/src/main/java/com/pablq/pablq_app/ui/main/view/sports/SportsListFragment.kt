@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.pablq.pablq_app.R
 import com.pablq.pablq_app.ui.main.MainViewModel
 import com.pablq.pablq_app.ui.main.Sport
+import com.pablq.pablq_app.ui.main.view.games.GamesListFragment
 
 class SportsListFragment : Fragment() {
 
@@ -22,9 +23,9 @@ class SportsListFragment : Fragment() {
 
         val recyclerView = rootView.findViewById<RecyclerView>(R.id.sportsListRecyclerView)
 
-        val sportsListAdapter = SportsListAdapter(viewModel.allSports, {
+        val sportsListAdapter = SportsListAdapter(viewModel.allSports) {
             handleSportSelected(it)
-        })
+        }
 
         recyclerView.adapter = sportsListAdapter
 
@@ -33,6 +34,18 @@ class SportsListFragment : Fragment() {
 
     private fun handleSportSelected(sport: Sport) {
         viewModel.selectedSport.value = sport
-        // TODO: Shows games list view
+
+        if (isAdded) {
+            parentFragmentManager
+                .beginTransaction()
+                .replace(R.id.container, GamesListFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.wakeUp()
     }
 }

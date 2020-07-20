@@ -9,7 +9,11 @@ import com.pablq.pablq_app.ui.main.Sport
 
 class SportsListAdapter(private val sportsList: List<Sport>, private val onClickHandler: (Sport) -> Unit) : RecyclerView.Adapter<SportsListAdapter.SportCardViewHolder>() {
 
-    inner class SportCardViewHolder(val textView: TextView, val onClickHandler: (Sport) -> Unit) : RecyclerView.ViewHolder(textView) {
+    inner class SportCardViewHolder(
+        private val textView: TextView,
+        private val onClickHandler: (Sport) -> Unit
+    ) : RecyclerView.ViewHolder(textView) {
+
         fun bind(sport: Sport) {
             textView.text = sport.league
             textView.setOnClickListener {

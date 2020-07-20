@@ -56,8 +56,12 @@ class MainRepository: IMainRespository {
 
 data class Sport(val league: String, val imageName: String)
 
-data class Game(val headline: String, val lines: List<String>, val link: String) {
+data class Game(
+    val headline: String,
+    private val lines: List<String>,
+    private val link: String) {
+
     val description = lines.joinToString("\n")
     val isFavorite = headline.toLowerCase(Locale.ROOT).contains("chicago")
-    val url = Uri.parse(link)
+    val uri: Uri = Uri.parse(link)
 }
